@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         height: height / 8,
-        backgroundColor: '#ffff22',
+        backgroundColor: '#34B089',
         justifyContent: 'space-around',
         padding: 10,
     },
