@@ -8,3 +8,5 @@ Use navigator:
     - npm install @react-navigation/bottom-tabs --save
 Link for searching icon:
     - https://ionicframework.com/docs/v3/ionicons/
+Use Swiper:
+    - yarn add react-native-swiper@nightly

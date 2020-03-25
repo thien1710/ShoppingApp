@@ -12,7 +12,6 @@ import ChangeInfo from './src/components/ChangeInfo/ChangeInfo'
 import Main from './src/components/Main/Main'
 
 import Cart from './src/components/Main/Cart/Cart'
-import Shop from './src/components/Main/Shop/Shop'
 import Search from './src/components/Main/Search/Search'
 import Contact from './src/components/Main/Contact/Contact'
 
