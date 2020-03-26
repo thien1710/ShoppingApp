@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, Image, TextInput, Dimensions, ImageBackground } from 'react-native';
 
 import Authentication from '../Authentication/Authentication';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-
-import Header from './Header'
+import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 
 import Swiper from 'react-native-swiper'
+
+import Collection from './ScreenObjects/Collection';
+import Category from './ScreenObjects/Category'
 
 const { width, height } = Dimensions.get('window');
 export default class Main extends Component {
     render() {
         return (
 
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
 
                 {/* HEADER */}
                 <View style={styles.header}>
@@ -35,36 +36,11 @@ export default class Main extends Component {
                 {/* MAIN */}
 
                 {/* SPRING COLLECTION */}
-                <View style={styles.wrapper}>
-                    <View style={{ flex: 1, justifyContent: 'center' }}>
-                        <Text style={styles.textStyle} >SPRING COLLECTION</Text>
-                    </View>
-                    <View style={{ flex: 4 }}>
-                        <Image source={require('../../media/temp/banner.jpg')} style={styles.imageStyle} />
-                    </View>
-                </View>
+                <Collection/>
 
                 {/* LIST OF CATEGORY */}
-                <View style={styles.wrapper}>
-                    <View style={{ flex: 1, justifyContent: 'center' }}>
-                        <Text style={styles.textStyle} >LIST OF CATEGORY</Text>
-                    </View>
-                    <View style={{ flex: 4 }}>
-                        <Swiper showsPagination width={imageWidth} height={imageHeight}>
-                            
-                            <ImageBackground source={require('../../media/temp/little.jpg')} style={styles.imageStyle}>
-                                <Text style={styles.cateTitle}>Maxi Dress</Text>
-                            </ImageBackground>
-                            <ImageBackground source={require('../../media/temp/maxi.jpg')} style={styles.imageStyle}>
-                                <Text style={styles.cateTitle}>Maxi Dress</Text>
-                            </ImageBackground>
-                            <ImageBackground source={require('../../media/temp/party.jpg')} style={styles.imageStyle}>
-                                <Text style={styles.cateTitle}>Maxi Dress</Text>
-                            </ImageBackground>
-                        </Swiper>
-                    </View>
-                </View>
-            </View>
+                <Category/>
+            </ScrollView>
         );
     }
 }
@@ -100,15 +76,15 @@ const styles = StyleSheet.create({
         height: 25,
     },
     wrapper: {
-        height: height * 0.33,
-        // height: height * 0.33,
+        height: height * 0.35,
         backgroundColor: '#FFF',
         margin: 10,
         shadowColor: '#2E272B',
         shadowOffset: { width: 0, height: 3 },
         shadowOpacity: 0.2,
         padding: 10,
-        paddingTop: 0
+        paddingTop: 0,
+        justifyContent: 'space-between',
     },
     textStyle: {
         fontSize: 20,
