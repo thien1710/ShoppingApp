@@ -5,6 +5,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const { width, height } = Dimensions.get('window');
 
+import Search from '../Search/Search';
+
 export default class Collection extends Component {
     render() {
         return (
@@ -15,6 +17,9 @@ export default class Collection extends Component {
                 <View style={{ flex: 4, justifyContent: 'flex-end' }}>
                     <Image source={require('../../../media/temp/banner.jpg')} style={styles.imageStyle} />
                 </View>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Search')}>
+                    <Text>Click Click</Text>
+                </TouchableOpacity>
             </View>
         );
     }

@@ -8,6 +8,7 @@ import Swiper from 'react-native-swiper'
 
 import Collection from './ScreenObjects/Collection';
 import Category from './ScreenObjects/Category'
+import TopProduct from './ScreenObjects/TopProduct'
 
 const { width, height } = Dimensions.get('window');
 export default class Main extends Component {
@@ -36,10 +37,13 @@ export default class Main extends Component {
                 {/* MAIN */}
 
                 {/* SPRING COLLECTION */}
-                <Collection/>
+                <Collection navigation={this.props.navigation}/>
 
                 {/* LIST OF CATEGORY */}
                 <Category/>
+
+                {/* TOP PRODUCT */}
+                <TopProduct/>
             </ScrollView>
         );
     }

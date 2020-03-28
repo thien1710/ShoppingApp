@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, View, Text } from 'react-native';
+import { Button, View, Text, StatusBar } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -10,6 +10,7 @@ import Authentication from './src/components/Authentication/Authentication'
 import OrderHistory from './src/components/OrderHistory/OrderHistory'
 import ChangeInfo from './src/components/ChangeInfo/ChangeInfo'
 import Main from './src/components/Main/Main'
+import DrawerComponent from './navigation/Drawer'
 
 import Cart from './src/components/Main/Cart/Cart'
 import Search from './src/components/Main/Search/Search'
@@ -21,6 +22,10 @@ const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+StatusBar.setHidden(true);
+
+//import for testing
+// import TopProduct from './src/components/Main/ScreenObjects/TopProduct'
 function Home() {
   return (
     <Tab.Navigator
@@ -57,7 +62,7 @@ function Home() {
 
 function Root() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator headerMode='none'>
       <Stack.Screen name="Main" component={Home} />
       <Stack.Screen name="OrderHistory" component={OrderHistory} />
       <Stack.Screen name="Authentication" component={Authentication} />
@@ -65,14 +70,28 @@ function Root() {
   );
 }
 
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Root">
-        <Drawer.Screen name="Main" component={Root} />
-        <Stack.Screen name="OrderHistory" component={OrderHistory} />
-        <Drawer.Screen name="ChangeInfo" component={ChangeInfo} />
-      </Drawer.Navigator>
-    </NavigationContainer>
-  );
+
+export default class App extends React.Component {
+  render() {
+    return (
+      // <TopProduct/>
+      <NavigationContainer>
+        {/* <Drawer.Navigator initialRouteName="Root"
+          drawerContentOptions={{
+            activeTintColor: '#e91e63',
+            itemStyle: { marginVertical: 30 },
+          }}
+          drawerStyle={{
+            backgroundColor: '#34B089',
+            width: 240,
+          }}
+        >
+          <Drawer.Screen name="Main" component={Root} />
+          <Stack.Screen name="OrderHistory" component={OrderHistory} />
+          <Drawer.Screen name="ChangeInfo" component={ChangeInfo} />
+        </Drawer.Navigator> */}
+         <DrawerComponent />
+      </NavigationContainer>
+    );
+  }
 }
