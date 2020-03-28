@@ -1,7 +1,7 @@
 /* eslint-disable react-native/sort-styles */
 /* eslint-disable import/order */
 import React, { Component } from 'react';
-import { Image, StyleSheet, Text, Button } from 'react-native';
+import { Image, StyleSheet, Text, Button, View, TouchableOpacity } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
     DrawerItem,
@@ -58,49 +58,90 @@ function Home() {
     );
 }
 
+// const loginJSX = (
+//     // <View style={{alignItems:'center'}}>
+//     //         <Image source={require('../src/media/temp/profile.png')}
+//     //             style={{width: 70, height: 70}} />
+//     //         <DrawerItem
+//     //             label="Logout"
+//     //             labelStyle={{ color: 'dark' }}
+//     //             onPress={() => alert('Are your sure to logout?')}
+//     //         />
+//     //         <DrawerItem
+//     //             label="Contact" onPress={() => props.navigation.navigate('Contact')} />
+//     //         <Text >contact@react-ui-kit.com</Text>
+//     //         </View>
+//     
+// );
+
+function LoginJSX() {
+    return (
+        <View style={styles.loginContainer}>
+            <Text style={styles.username}>Nguyen Van Pho</Text>
+            <View>
+                <TouchableOpacity style={styles.btnSignInStyle}>
+                    <Text style={styles.btnTextSignIn}>Order History</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.btnSignInStyle}>
+                    <Text style={styles.btnTextSignIn}>Change Info</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.btnSignInStyle}>
+                    <Text style={styles.btnTextSignIn}>Sign out</Text>
+                </TouchableOpacity>
+            </View>
+            <View />
+        </View>
+    );
+}
+
+function LogoutJSX() {
+    return (
+        <View style={{ flex: 1 }}>
+            <TouchableOpacity style={styles.btnStyle}>
+                <Text style={styles.btnText}>Sign In</Text>
+            </TouchableOpacity>
+        </View>
+    )
+}
+
+function Greeting(props) {
+    const isLoggedIn = props.isLoggedIn;
+    if (isLoggedIn) {
+        return <LoginJSX />;
+    }
+    return <LogoutJSX />;
+}
+
 const Screens = ({ navigation, style }) => {
     return (
         <Stack.Navigator
             screenOptions={{
                 headerTransparent: true,
                 headerTitle: null,
-                // headerLeft: () => (
-                //     <Button title='Click button'
-                //         onPress={() => navigation.openDrawer()}>
-
-                //     </Button>
-                // ),
-            }}
-        >
+            }}>
             <Stack.Screen name="Home">{props => <Home {...props} />}</Stack.Screen>
             <Stack.Screen name="Authentication">{props => <Authentication {...props} />}</Stack.Screen>
             <Stack.Screen name="OrderHistory">{props => <OrderHistory {...props} />}</Stack.Screen>
         </Stack.Navigator>);
 };
-
+import MenuDrawer from '../src/components/MenuDrawer/MenuDrawer'
 const DrawerContent = props => {
     return (
-        <DrawerContentScrollView {...props}>
-            <DrawerItem
-                label="Logout"
-                labelStyle={{ color: 'dark' }}
-                onPress={() => alert('Are your sure to logout?')}
-            />
-            <DrawerItem
-                label="Contact" onPress={() => props.navigation.navigate('Contact')} />
-            <Text >contact@react-ui-kit.com</Text>
+        <DrawerContentScrollView {...props} style={{ backgroundColor: '#34B089' }}>
+            <Greeting isLoggedIn={true} />
         </DrawerContentScrollView>
     );
 };
 
 export default class DrawerComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { isLoggedIn: false };
+    }
     render() {
+        const isLoggedIn = this.state.isLoggedIn;
         return (
-            <Drawer.Navigator
-                drawerContent={props => {
-                    return <DrawerContent {...props} />;
-                }}
-            >
+            <Drawer.Navigator drawerContent={props => { return <DrawerContent {...props} />; }}>
                 <Drawer.Screen name="Screens">
                     {props => <Screens {...props} />}
                 </Drawer.Screen>
@@ -110,6 +151,9 @@ export default class DrawerComponent extends Component {
 };
 
 const styles = StyleSheet.create({
+    test: {
+        backgroundColor: 'green'
+    },
     stack: {
         flex: 1,
         shadowColor: '#FFF',
@@ -124,10 +168,58 @@ const styles = StyleSheet.create({
     drawerStyles: { flex: 1, width: '50%', backgroundColor: 'transparent' },
     drawerItem: { alignItems: 'flex-start', marginVertical: 0 },
     drawerLabel: { color: 'white', marginLeft: -16 },
-    avatar: {
-        borderRadius: 60,
-        marginBottom: 16,
-        borderColor: 'white',
-        borderWidth: StyleSheet.hairlineWidth,
+    // avatar: {
+    //     borderRadius: 60,
+    //     marginBottom: 16,
+    //     borderColor: 'white',
+    //     borderWidth: StyleSheet.hairlineWidth,
+    // },
+    container: {
+        flex: 1,
+        backgroundColor: '#34B089',
+        borderRightWidth: 3,
+        borderColor: '#fff',
+        alignItems: 'center'
     },
+    profile: {
+        width: 120,
+        height: 120,
+        borderRadius: 60,
+        marginVertical: 30
+    },
+    btnStyle: {
+        height: 50,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 5,
+        paddingHorizontal: 70
+    },
+    btnText: {
+        color: '#34B089',
+        fontSize: 20
+    },
+    btnSignInStyle: {
+        height: 50,
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        width: 200,
+        marginBottom: 10,
+        justifyContent: 'center',
+        paddingLeft: 10
+    },
+    btnTextSignIn: {
+        color: '#34B089',
+        fontSize: 15
+    },
+    loginContainer: {
+        flex: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    username: {
+        color: '#fff',
+        // fontFamily: 'Avenir', 
+        fontSize: 20
+    }
 });
